@@ -16,7 +16,10 @@ JWT_SECRET=your_super_secret_jwt_key
 ADMIN_NAME=Admin User
 ADMIN_EMAIL=admin@local
 ADMIN_PASSWORD=admin123
+CORS_ORIGIN=http://localhost:5173,http://localhost:3000
 ```
+
+`CORS_ORIGIN` is a comma-separated list of allowed origins. It is strictly enforced without implicit fallbacks.
 
 > **Note on Port 5001**: Port 5000 is reserved by macOS AirPlay Receiver / ControlCenter. Hence, the backend defaults to port `5001`.
 
