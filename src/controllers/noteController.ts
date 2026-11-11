@@ -7,7 +7,7 @@ export const getNotes = async (req: Request, res: Response): Promise<void> => {
     const limit = Math.max(1, parseInt(req.query.limit as string) || 10);
     const skip = (page - 1) * limit;
 
-    const filter = req.user?.role === "admin" ? {} : { user: req.user?._id };
+    const filter = req.user?.role === "admin" ? {} : { userId: req.user?._id };
 
     const [notes, total] = await Promise.all([
       Note.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit).lean(),

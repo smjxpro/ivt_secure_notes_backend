@@ -7,7 +7,7 @@ export const getUsersByInterest = async (
   res: Response,
 ): Promise<void> => {
   try {
-    const reult = await User.aggregate([
+    const result = await User.aggregate([
       { $unwind: "$interests" },
       {
         $group: {
@@ -27,7 +27,7 @@ export const getUsersByInterest = async (
       },
     ]);
 
-    res.status(200).json(reult);
+    res.status(200).json(result);
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
@@ -53,7 +53,7 @@ export const getUserPosts = async (
         $lookup: {
           from: "posts",
           localField: "_id",
-          foreignField: "userId",
+          foreignField: "authorId",
           pipeline: [{ $sort: { createdAt: -1 } }],
           as: "posts",
         },

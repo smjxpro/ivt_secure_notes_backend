@@ -14,15 +14,18 @@ app.use(express.json());
 app.use("/api", apiRoutes);
 
 // Connect to MongoDB and start the server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 const MONGO_URI = process.env.MONGO_URI as string;
 
 mongoose
   .connect(MONGO_URI)
   .then(() => {
     console.log("Connected to MongoDB");
-    app.listen(PORT, () => {
+    const server = app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
+    });
+    server.on("error", (error) => {
+      console.error("Server listen error:", error);
     });
   })
   .catch((error) => {

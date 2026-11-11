@@ -8,6 +8,7 @@ interface TokenPayload {
 }
 
 export const authenticate = async(req: Request, res: Response, next: NextFunction): Promise<void> => {
+    console.log("Authenticating request:", req.method, req.url);
 try {
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
