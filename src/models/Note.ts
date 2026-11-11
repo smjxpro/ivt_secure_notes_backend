@@ -1,4 +1,5 @@
-import {Document, model, Schema, Types } from "mongoose";
+import { Document, model, Schema, Types } from "mongoose";
+import "./User";
 
 export interface INote extends Document{
 _id: Types.ObjectId;

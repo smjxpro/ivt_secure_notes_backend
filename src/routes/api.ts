@@ -26,9 +26,9 @@ router.put("/admin/users/:id", authenticate, authorize(['admin']), adminControll
 router.delete("/admin/users/:id", authenticate, authorize(['admin']), adminController.deleteUser);
 
 // Aggregation routes
-router.get("/aggregation/interests", aggregationController.getUsersByInterest);
+router.get("/aggregations/interests", aggregationController.getUsersByInterest);
 router.get(
-  "/aggregation/users/:userId/posts",
+  "/aggregations/users/:userId/posts",
   aggregationController.getUserPosts,
 );
 

@@ -16,13 +16,16 @@ export const getAllUsers = async (
       User.countDocuments(),
     ]);
 
+    const totalPages = Math.ceil(total / limit);
+
     res.status(200).json({
       data: users,
       pagination: {
         total,
         page,
         limit,
-        totalPages: Math.ceil(total / limit),
+        totalPages,
+        pages: totalPages,
       },
     });
   } catch (error: any) {
@@ -70,8 +73,10 @@ export const updateUser = async (
   try {
     const updates = { ...req.body };
 
-    if (updates.password) {
+    if (updates.password && typeof updates.password === "string" && updates.password.trim().length > 0) {
       updates.password = await bcrypt.hash(updates.password, 10);
+    } else {
+      delete updates.password;
     }
 
     const updatedUser = await User.findByIdAndUpdate(req.params.id, updates, {

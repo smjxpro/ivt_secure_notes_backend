@@ -10,17 +10,25 @@ export const getNotes = async (req: Request, res: Response): Promise<void> => {
     const filter = req.user?.role === "admin" ? {} : { userId: req.user?._id };
 
     const [notes, total] = await Promise.all([
-      Note.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit).lean(),
+      Note.find(filter)
+        .populate("userId", "name email")
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit)
+        .lean(),
       Note.countDocuments(filter),
     ]);
     
+    const totalPages = Math.ceil(total / limit);
+
     res.status(200).json({
         data: notes,
         pagination: {
             total,
             page,
             limit,
-            totalPages: Math.ceil(total / limit),
+            totalPages,
+            pages: totalPages,
         },
     });
   } catch (error: any) {

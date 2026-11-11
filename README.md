@@ -36,12 +36,12 @@ This script reads `ADMIN_NAME`, `ADMIN_EMAIL`, and `ADMIN_PASSWORD` from `.env`,
 ## API Endpoints
 
 ### Authentication
-- `POST /api/auth/register` - Register a new account (`name`, `email`, `password`, optional `interest`)
+- `POST /api/auth/register` - Register a new account (`name`, `email`, `password`, optional `interests`)
 - `POST /api/auth/login` - Authenticate user (`email`, `password`), returns JWT token and profile
 - `GET /api/auth/profile` - Get authenticated user profile (`Authorization: Bearer <token>`)
 
 ### Notes (Protected)
-- `GET /api/notes?page=1&limit=5` - Paginated notes (regular users see own notes, admins see all)
+- `GET /api/notes?page=1&limit=5` - Paginated notes (regular users see own notes, admins see all with author name and email)
 - `GET /api/notes/:id` - Fetch single note by ID
 - `POST /api/notes` - Create a note (`title`, `content`)
 - `PUT /api/notes/:id` - Update a note
@@ -54,6 +54,6 @@ This script reads `ADMIN_NAME`, `ADMIN_EMAIL`, and `ADMIN_PASSWORD` from `.env`,
 - `DELETE /api/admin/users/:id` - Delete user
 
 ### Aggregation
-- `GET /api/aggregation/interests` - Aggregated user counts grouped by interest
-- `GET /api/aggregation/users/:userId/posts` - Aggregated user details and their authored posts
+- `GET /api/aggregations/interests` - Aggregated user counts grouped by interest
+- `GET /api/aggregations/users/:userId/posts` - Aggregated user details and their authored posts
 
